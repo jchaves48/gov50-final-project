@@ -11,4 +11,21 @@ output:
 
 ## Project thoughts
 
+I am interested in exploring data related to football/soccer statistics. Perhaps analyzing  the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field. 
+
+## Data
+
+```{r}
+library(tidyverse)
+Data <- read_csv("Data/spi_matches.csv")
+Data
+```
+
+## Proposal:
+
+
+Does a team meeting or exceeding their xG mean that a soccer team will avoid relegation in their league? In this study, I plan to examine the expected goal ratio (xG) of English Premier League teams to their actual goals and see if teams that met or exceeded their xG remained in the league. I hypothesize that teams will remain in the English Premier League if their expected goals ratio (xG) is met or exceeded. My sample is comprised of the 20 Premier League teams in the 2016 season. I may specifically look at the bottom half of the table to (Chelsea, Everton, Swansea)
+
+
 I am interested in exploring data related to football/soccer statistics. Perhaps analyzing the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field. 
+>>>>>>> da28519243ff798d7d294c5a1631f06d206695c9
