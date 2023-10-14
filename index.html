@@ -1519,10 +1519,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>I am interested in exploring data related to football/soccer statistics. Perhaps analyzing the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field.</p>
-<h2 id="data">Data</h2>
+<h2 id="data">Data:</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
 <span><span class='va'>Data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"Data/spi_matches.csv"</span><span class='op'>)</span></span>
 <span><span class='va'>Data</span></span></code></pre>
 </div>
@@ -1544,12 +1545,34 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 #   proj_score2 &lt;dbl&gt;, importance1 &lt;dbl&gt;, importance2 &lt;dbl&gt;,
 #   score1 &lt;dbl&gt;, score2 &lt;dbl&gt;, xg1 &lt;dbl&gt;, xg2 &lt;dbl&gt;, nsxg1 &lt;dbl&gt;,
 #   nsxg2 &lt;dbl&gt;, adj_score1 &lt;dbl&gt;, adj_score2 &lt;dbl&gt;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pl_table_2016</span> <span class='op'>&lt;-</span> <span class='va'>Data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>league</span> <span class='op'>==</span> <span class='st'>"Barclays Premier League"</span>, <span class='va'>season</span> <span class='op'>==</span> <span class='st'>"2016"</span><span class='op'>)</span></span>
+<span><span class='va'>pl_table_2016</span></span></code></pre>
+</div>
+<pre><code># A tibble: 380 × 23
+   season date       league_id league    team1 team2  spi1  spi2 prob1
+    &lt;dbl&gt; &lt;date&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1   2016 2016-08-13      2411 Barclays… Hull… Leic…  53.6  66.8 0.346
+ 2   2016 2016-08-13      2411 Barclays… Ever… Tott…  68.0  73.2 0.391
+ 3   2016 2016-08-13      2411 Barclays… Crys… West…  55.2  58.7 0.421
+ 4   2016 2016-08-13      2411 Barclays… Midd… Stok…  56.3  60.4 0.438
+ 5   2016 2016-08-13      2411 Barclays… Sout… Watf…  69.5  59.3 0.576
+ 6   2016 2016-08-13      2411 Barclays… Burn… Swan…  59.0  59.7 0.448
+ 7   2016 2016-08-13      2411 Barclays… Manc… Sund…  86.4  53.6 0.815
+ 8   2016 2016-08-14      2411 Barclays… AFC … Manc…  61.6  80.5 0.211
+ 9   2016 2016-08-14      2411 Barclays… Arse… Live…  82.6  77.4 0.555
+10   2016 2016-08-15      2411 Barclays… Chel… West…  80.7  63.3 0.691
+# ℹ 370 more rows
+# ℹ 14 more variables: prob2 &lt;dbl&gt;, probtie &lt;dbl&gt;, proj_score1 &lt;dbl&gt;,
+#   proj_score2 &lt;dbl&gt;, importance1 &lt;dbl&gt;, importance2 &lt;dbl&gt;,
+#   score1 &lt;dbl&gt;, score2 &lt;dbl&gt;, xg1 &lt;dbl&gt;, xg2 &lt;dbl&gt;, nsxg1 &lt;dbl&gt;,
+#   nsxg2 &lt;dbl&gt;, adj_score1 &lt;dbl&gt;, adj_score2 &lt;dbl&gt;</code></pre>
 </div>
 <h2 id="proposal">Proposal:</h2>
-<p>Does a team meeting or exceeding their xG mean that a soccer team will avoid relegation in their league? In this study, I plan to examine the expected goal ratio (xG) of English Premier League teams to their actual goals and see if teams that met or exceeded their xG remained in the league. I hypothesize that teams will remain in the English Premier League if their expected goals ratio (xG) is met or exceeded. My sample is comprised of the 20 Premier League teams in the 2016 season. I may specifically look at the bottom half of the table to (Chelsea, Everton, Swansea)</p>
-<p>I am interested in exploring data related to football/soccer statistics. Perhaps analyzing the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; da28519243ff798d7d294c5a1631f06d206695c9</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Does the importance of a soccer game influence whether or not a team wins a game? In this study, I plan to examine if a game is deemed more important for a team, will that team win that game. I hypothesize that teams will win a game when it is more important to them than it is to their opponent.My sample is comprised of the 20 English Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset. My unit of analysis will be a team (e.g. Manchester United, Leicester City, etc.). The explanatory variable of interest is how important a game is to a team (importance1 for a home team and importance 2 for an away team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable would be a count of the number of wins each team has on a range of how important the games were (e.g., count of wins in games that range from 0-20 in importance, 20-40, 40-60, etc.). If I observe more wins when the importance of the game is higher, then this will provide support for my hypothesis. If I observe more wins when the game is of less importance to a team, then this will provide evidence against my hypothesis.</p>
+<p>Does a soccer team meeting or exceeding their xG mean that they will win their games? In this study, I plan to examine the expected goal ratio (xG) of English Premier League teams to their actual goals and see if teams that met or exceeded their xG won the majority of their games. I hypothesize that teams will win most (51%) of their league games if their expected goals ratio (xG) is met or exceeded. My sample is comprised of the 20 Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset and looking at the xg1 (the number of expected goals created by a home team), xg2 (the number of expected goals created by an away team), score1 (the number of goals scored by the home team), and score2 (the number of goals scored by the away team).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

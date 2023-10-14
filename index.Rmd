@@ -13,19 +13,24 @@ output:
 
 I am interested in exploring data related to football/soccer statistics. Perhaps analyzing  the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field. 
 
-## Data
+## Data:
 
 ```{r}
+library(dplyr)
 library(tidyverse)
 Data <- read_csv("Data/spi_matches.csv")
 Data
+
+pl_table_2016 <- Data |>
+  filter(league == "Barclays Premier League", season == "2016")
+pl_table_2016
 ```
 
 ## Proposal:
 
 
-Does a team meeting or exceeding their xG mean that a soccer team will avoid relegation in their league? In this study, I plan to examine the expected goal ratio (xG) of English Premier League teams to their actual goals and see if teams that met or exceeded their xG remained in the league. I hypothesize that teams will remain in the English Premier League if their expected goals ratio (xG) is met or exceeded. My sample is comprised of the 20 Premier League teams in the 2016 season. I may specifically look at the bottom half of the table to (Chelsea, Everton, Swansea)
+Does the importance of a soccer game influence whether or not a team wins a game? In this study, I plan to examine if a game is deemed more important for a team, will that team win that game. I hypothesize that teams will win a game when it is more important to them than it is to their opponent.My sample is comprised of the 20 English Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset. My unit of analysis will be a team (e.g. Manchester United, Leicester City, etc.). The explanatory variable of interest is how important a game is to a team (importance1 for a home team and importance 2 for an away team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable would be a count of the number of wins each team has on a range of how important the games were (e.g., count of wins in games that range from 0-20 in importance, 20-40, 40-60, etc.). If I observe more wins when the importance of the game is higher, then this will provide support for my hypothesis. If I observe more wins when the game is of less importance to a team, then this will provide evidence against my hypothesis.
+
+Does a soccer team meeting or exceeding their xG mean that they will win their games? In this study, I plan to examine the expected goal ratio (xG) of English Premier League teams to their actual goals and see if teams that met or exceeded their xG won the majority of their games. I hypothesize that teams will win most (51%) of their league games if their expected goals ratio (xG) is met or exceeded. My sample is comprised of the 20 Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset and looking at the xg1 (the number of expected goals created by a home team), xg2 (the number of expected goals created by an away team), score1 (the number of goals scored by the home team), and score2 (the number of goals scored by the away team). 
 
 
-I am interested in exploring data related to football/soccer statistics. Perhaps analyzing the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field. 
->>>>>>> da28519243ff798d7d294c5a1631f06d206695c9
