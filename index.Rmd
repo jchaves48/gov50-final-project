@@ -18,12 +18,23 @@ I am interested in exploring data related to football/soccer statistics. Perhaps
 ```{r}
 library(dplyr)
 library(tidyverse)
+library(ggplot2)
 Data <- read_csv("Data/spi_matches.csv")
-Data
+
+Data <- Data |>
+  drop_na()
 
 pl_table_2016 <- Data |>
-  filter(league == "Barclays Premier League", season == "2016")
+  filter(league == "Barclays Premier League", season == "2016") |>
+  mutate(result = case_when(score1 > score2 ~ " Home Win",
+                            score1 < score2 ~ "Away Win",
+                            score2 == score1 ~ "Draw")) |>
+  group_by(importance1, importance2)
 pl_table_2016
+  
+  ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
+    geom_histogram() +
+    labs(x = "Importance of Game to the Home Team", y = "Count")
 ```
 
 ## Proposal:
