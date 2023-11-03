@@ -34,7 +34,7 @@ pl_table_2016
   
   ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
     geom_histogram() +
-    labs(x = "Importance of Game to the Home Team", y = "Count")
+    labs(x = "Degree of Importance of a Game to the Home Team", y = "Count")
 ```
 
 ## Proposal:
