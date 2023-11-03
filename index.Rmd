@@ -32,9 +32,10 @@ pl_table_2016 <- Data |>
   group_by(importance1, importance2)
 pl_table_2016
   
-  ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
+pl_importance <- ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
     geom_histogram() +
     labs(x = "Degree of Importance of a Game to the Home Team", y = "Count")
+pl_importance
 ```
 
 ## Proposal:
