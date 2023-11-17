@@ -51,9 +51,10 @@ Milestone #4:
 
 
 ```{r}
-pl_table_2016 |>
+count_table <- pl_table_2016 |>
   ggplot(aes(x = result)) +
   geom_bar(mapping = aes(fill = result))
+count_table
 ```
 
 
