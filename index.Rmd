@@ -27,8 +27,11 @@ Data <- Data |>
 pl_table_2016 <- Data |>
   filter(league == "Barclays Premier League", season == "2016") |>
   mutate(result = case_when(score1 > score2 ~ " Home Win",
-                            score1 < score2 ~ "Away Win",
-                            score2 == score1 ~ "Draw")) |>
+                            score1 < score2 ~ "Home Loss",
+                            score2 == score1 ~ "Draw"),
+         result1 = case_when(score1 > score2 ~ 1,
+                            score1 < score2 ~ 0,
+                            score2 == score1 ~ 0)) |>
   group_by(importance1, importance2)
 pl_table_2016
   
@@ -42,3 +45,26 @@ pl_importance
 
 
 Does the importance of a soccer game influence whether or not a team wins a game? In this study, I plan to examine if a game is deemed more important for a team, will that team win that game. I hypothesize that teams will win a game when it is more important to them than it is to their opponent. My sample is comprised of the 20 English Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset. My unit of analysis will be a team (e.g. Manchester United, Leicester City, etc.). The explanatory variable of interest is how important a game is to a team (importance1 for a home team and importance 2 for an away team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable would be a count of the number of wins each team has on a range of how important the games were (e.g., count of wins in games that range from 0-20 in importance, 20-40, 40-60, etc.). If I observe more wins when the importance of the game is higher, then this will provide support for my hypothesis. If I observe more wins when the game is of less importance to a team, then this will provide evidence against my hypothesis.
+
+
+Milestone #4:
+
+
+```{r}
+pl_table_2016 |>
+  ggplot(aes(x = result)) +
+  geom_bar(mapping = aes(fill = result))
+```
+
+
+
+
+
+```{r}
+library(texreg)
+fit1<- lm(result1~ importance1, data = pl_table_2016)
+
+screenreg(fit1, digits = 3)
+
+```
+If there is one unit increase in importance, the probability of a home win will increase by 0.4 percentage points. If there is an importance increase from 0 to 100 there will be a 40 percentage point increase in the probability of the home team winning. I believe that this effect is substantial. The p-value is extremely small which means that there is a statistically significant correlation between importance and the result of the game.

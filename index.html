@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Data/spi_matches.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Data/spi_matches.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1533,12 +1533,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='va'>pl_table_2016</span> <span class='op'>&lt;-</span> <span class='va'>Data</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>league</span> <span class='op'>==</span> <span class='st'>"Barclays Premier League"</span>, <span class='va'>season</span> <span class='op'>==</span> <span class='st'>"2016"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>result <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='va'>score1</span> <span class='op'>&gt;</span> <span class='va'>score2</span> <span class='op'>~</span> <span class='st'>" Home Win"</span>,</span>
-<span>                            <span class='va'>score1</span> <span class='op'>&lt;</span> <span class='va'>score2</span> <span class='op'>~</span> <span class='st'>"Away Win"</span>,</span>
-<span>                            <span class='va'>score2</span> <span class='op'>==</span> <span class='va'>score1</span> <span class='op'>~</span> <span class='st'>"Draw"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>                            <span class='va'>score1</span> <span class='op'>&lt;</span> <span class='va'>score2</span> <span class='op'>~</span> <span class='st'>"Home Loss"</span>,</span>
+<span>                            <span class='va'>score2</span> <span class='op'>==</span> <span class='va'>score1</span> <span class='op'>~</span> <span class='st'>"Draw"</span><span class='op'>)</span>,</span>
+<span>         result1 <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='va'>score1</span> <span class='op'>&gt;</span> <span class='va'>score2</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
+<span>                            <span class='va'>score1</span> <span class='op'>&lt;</span> <span class='va'>score2</span> <span class='op'>~</span> <span class='fl'>0</span>,</span>
+<span>                            <span class='va'>score2</span> <span class='op'>==</span> <span class='va'>score1</span> <span class='op'>~</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>importance1</span>, <span class='va'>importance2</span><span class='op'>)</span></span>
 <span><span class='va'>pl_table_2016</span></span></code></pre>
 </div>
-<pre><code># A tibble: 344 × 24
+<pre><code># A tibble: 344 × 25
 # Groups:   importance1, importance2 [330]
    season date       league_id league    team1 team2  spi1  spi2 prob1
     &lt;dbl&gt; &lt;date&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -1553,10 +1556,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
  9   2016 2016-08-14      2411 Barclays… Arse… Live…  82.6  77.4 0.555
 10   2016 2016-08-15      2411 Barclays… Chel… West…  80.7  63.3 0.691
 # ℹ 334 more rows
-# ℹ 15 more variables: prob2 &lt;dbl&gt;, probtie &lt;dbl&gt;, proj_score1 &lt;dbl&gt;,
+# ℹ 16 more variables: prob2 &lt;dbl&gt;, probtie &lt;dbl&gt;, proj_score1 &lt;dbl&gt;,
 #   proj_score2 &lt;dbl&gt;, importance1 &lt;dbl&gt;, importance2 &lt;dbl&gt;,
 #   score1 &lt;dbl&gt;, score2 &lt;dbl&gt;, xg1 &lt;dbl&gt;, xg2 &lt;dbl&gt;, nsxg1 &lt;dbl&gt;,
-#   nsxg2 &lt;dbl&gt;, adj_score1 &lt;dbl&gt;, adj_score2 &lt;dbl&gt;, result &lt;chr&gt;</code></pre>
+#   nsxg2 &lt;dbl&gt;, adj_score1 &lt;dbl&gt;, adj_score2 &lt;dbl&gt;, result &lt;chr&gt;,
+#   result1 &lt;dbl&gt;</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pl_importance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>pl_table_2016</span>, mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>importance1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
@@ -1567,7 +1571,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <h2 id="proposal">Proposal:</h2>
 <p>Does the importance of a soccer game influence whether or not a team wins a game? In this study, I plan to examine if a game is deemed more important for a team, will that team win that game. I hypothesize that teams will win a game when it is more important to them than it is to their opponent. My sample is comprised of the 20 English Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset. My unit of analysis will be a team (e.g. Manchester United, Leicester City, etc.). The explanatory variable of interest is how important a game is to a team (importance1 for a home team and importance 2 for an away team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable would be a count of the number of wins each team has on a range of how important the games were (e.g., count of wins in games that range from 0-20 in importance, 20-40, 40-60, etc.). If I observe more wins when the importance of the game is higher, then this will provide support for my hypothesis. If I observe more wins when the game is of less importance to a team, then this will provide evidence against my hypothesis.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Milestone #4:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pl_table_2016</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/leifeld/texreg/'>texreg</a></span><span class='op'>)</span></span>
+<span><span class='va'>fit1</span><span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>result1</span><span class='op'>~</span> <span class='va'>importance1</span>, data <span class='op'>=</span> <span class='va'>pl_table_2016</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/texreg/man/screenreg.html'>screenreg</a></span><span class='op'>(</span><span class='va'>fit1</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+========================
+             Model 1    
+------------------------
+(Intercept)    0.336 ***
+              (0.045)   
+importance1    0.004 ***
+              (0.001)   
+------------------------
+R^2            0.046    
+Adj. R^2       0.043    
+Num. obs.    344        
+========================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+<p>If there is one unit increase in importance, the probability of a home win will increase by 0.4 percentage points. If there is an importance increase from 0 to 100 there will be a 40 percentage point increase in the probability of the home team winning. I believe that this effect is substantial. The p-value is extremely small which means that there is a statistically significant correlation between importance and the result of the game.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
