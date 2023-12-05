@@ -60,12 +60,38 @@ count_table
 
 
 
+Linear Regression for Importance of Games for Premier League Teams
 
 ```{r}
 library(texreg)
-fit1<- lm(result1~ importance1, data = pl_table_2016)
+fit1 <- lm(result1 ~ importance1 + importance2 + xg1 + xg2 + spi1 + spi2 + prob1 + prob2 + probtie + proj_score2 + proj_score1 + score1 + score2, data = pl_table_2016)
 
 screenreg(fit1, digits = 3)
 
+pl_table_2016 |>
+  ggplot(aes(x = importance1, y = prob1)) +
+  geom_point() +
+  facet_wrap(~result1) +
+  labs(x = "Importance of the Game to a Home Team", y = "Result",title = "Regression Between the Importance of a Home Match to a Team and the Result of the Match")
+
 ```
 If there is one unit increase in importance, the probability of a home win will increase by 0.4 percentage points. If there is an importance increase from 0 to 100 there will be a 40 percentage point increase in the probability of the home team winning. I believe that this effect is substantial. The p-value is extremely small which means that there is a statistically significant correlation between importance and the result of the game.
+
+# A Study on A Home Team's Performance Relative to the Importance of Their Game
+
+## Introduction
+
+  Does the importance of a soccer game influence whether or not a home team wins a game? In this study, I want to observe the relationship between a match's importance to a home team and the result of that match for the team. I hypothesize that as a match increases in importance, a home team will be more likely to win their game. My sample for this study is comprised of the 20 English Premier League teams in the 2016-2017 season. I will be using the spi.matches.csv dataset to in this research. My unit of analysis will be a home team (for each individual game). The explanatory variable of interest is how important a game is to a home team (importance1 measures the importance of a home team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable is the results of a game for a home team. If I observe a positive linear relationship between the importance of a match to a home team and the result, then this will provide support for my hypothesis. If there is a negative relationship, then this would provide support against my hypothesis as this would mean that the more important the game, the less a home team wins. 
+  The study is important in order to try and understand how best to predict a sports game. There are many variables that go into predicting the result of a soccer match, but if we can isolate the importance of a game as the explanatory variable, then we will can form more accurate predictions.
+  
+## Data
+
+[INSERT INFO HERE]
+
+## Results
+
+[INSERT INFO HERE]
+
+## Conclusion
+
+[INSERT INFO HERE]
