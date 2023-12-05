@@ -7,12 +7,6 @@ output:
     self_contained: false
 ---
 
-
-
-## Project thoughts
-
-I am interested in exploring data related to football/soccer statistics. Perhaps analyzing  the expected goals (xG) of Premier League teams or how different tactics and line-ups influence the distribution of ball possession across the field. 
-
 ## Data:
 
 ```{r}
@@ -82,6 +76,7 @@ If there is one unit increase in importance, the probability of a home win will 
 ## Introduction
 
   Does the importance of a soccer game influence whether or not a home team wins a game? In this study, I want to observe the relationship between a match's importance to a home team and the result of that match for the team. I hypothesize that as a match increases in importance, a home team will be more likely to win their game. My sample for this study is comprised of the 20 English Premier League teams in the 2016-2017 season. I will be using the spi.matches.csv dataset to in this research. My unit of analysis will be a home team (for each individual game). The explanatory variable of interest is how important a game is to a home team (importance1 measures the importance of a home team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable is the results of a game for a home team. If I observe a positive linear relationship between the importance of a match to a home team and the result, then this will provide support for my hypothesis. If there is a negative relationship, then this would provide support against my hypothesis as this would mean that the more important the game, the less a home team wins. 
+  
   The study is important in order to try and understand how best to predict a sports game. There are many variables that go into predicting the result of a soccer match, but if we can isolate the importance of a game as the explanatory variable, then we will can form more accurate predictions.
   
 ## Data
