@@ -35,6 +35,12 @@ pl_importance <- ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
 pl_importance
 ```
 
+```{r} 
+pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importance1, y = result1)) +
+  geom_col()
+
+pl_importance_results
+```
 ## Proposal:
 
 
@@ -54,21 +60,8 @@ count_table
 
 
 
-Linear Regression for Importance of Games for Premier League Teams
 
-```{r}
-library(texreg)
-fit1 <- lm(result1 ~ importance1 + importance2 + xg1 + xg2 + spi1 + spi2 + prob1 + prob2 + probtie + proj_score2 + proj_score1 + score1 + score2, data = pl_table_2016)
 
-screenreg(fit1, digits = 3)
-
-pl_table_2016 |>
-  ggplot(aes(x = importance1, y = prob1)) +
-  geom_point() +
-  facet_wrap(~result1) +
-  labs(x = "Importance of the Game to a Home Team", y = "Result",title = "Regression Between the Importance of a Home Match to a Team and the Result of the Match")
-
-```
 If there is one unit increase in importance, the probability of a home win will increase by 0.4 percentage points. If there is an importance increase from 0 to 100 there will be a 40 percentage point increase in the probability of the home team winning. I believe that this effect is substantial. The p-value is extremely small which means that there is a statistically significant correlation between importance and the result of the game.
 
 # A Study on A Home Team's Performance Relative to the Importance of Their Game
@@ -81,7 +74,46 @@ If there is one unit increase in importance, the probability of a home win will 
   
 ## Data
 
-[INSERT INFO HERE]
+
+Linear Regression for Importance of Games for Premier League Teams
+
+```{r}
+library(texreg)
+fit1 <- lm(result1 ~ importance1 + importance2 + xg1 + xg2 + spi1 + spi2 + prob1 + prob2 + probtie, data = pl_table_2016)
+
+screenreg(fit1, digits = 3)
+
+pl_table_2016 |>
+  ggplot(aes(x = importance1, y = prob1)) +
+  geom_point() +
+  facet_wrap(~result1) +
+  labs(x = "Importance of the Game to a Home Team", y = "Result",title = "Regression Between the Importance of a Home Match to a Team and the Result of the Match") +
+  theme_bw()
+
+fit2 <- lm(result1 ~ importance1, data = pl_table_2016)
+screenreg(fit2, digits = 3)
+fit2
+```
+
+```{r}
+library(broom)
+fit1_table <- tidy(fit1)
+fit1_table
+
+pl_var_labels <- c("(Intercept)" = "Intercept",
+                  "importance1" = "Match Importance to Home Team",
+                  "importance2" = "Match Importance to Away Team",
+                  "xg1" = "Home Team Expected Goals",
+                  "xg2" = "Away Team Expected Goals",
+                  "spi1" = "Home Team's Rating Before the Match",
+                  "spi2" = "Away Team's Rating Before the Match",
+                  "prob1" = "Probability of Home Team Winning",
+                  "prob2" = "Probability of Away Team Winning",
+                  "probtie" = "Probability of a Tie"
+)
+
+modelsummary::modelsummary(fit1, statistic = c("s.e. = {std.error}", "p = {p.value}"), coef_map = pl_var_labels, gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
 
 ## Results
 
