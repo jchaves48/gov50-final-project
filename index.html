@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Data/spi_matches.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Data/spi_matches.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1563,8 +1563,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 #   result1 &lt;dbl&gt;</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pl_importance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>pl_table_2016</span>, mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>importance1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Degree of Importance of a Game to the Home Team"</span>, y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"deepskyblue3"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Degree of Importance of a Game to the Home Team"</span>, y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span>  </span>
 <span><span class='va'>pl_importance</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
@@ -1572,7 +1574,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pl_importance_results</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>pl_table_2016</span>, mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>importance1</span>, y <span class='op'>=</span> <span class='va'>result1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>result1</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>pl_importance_results</span></span></code></pre>
 </div>
@@ -1580,97 +1584,68 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <h2 id="proposal">Proposal:</h2>
 <p>Does the importance of a soccer game influence whether or not a team wins a game? In this study, I plan to examine if a game is deemed more important for a team, will that team win that game. I hypothesize that teams will win a game when it is more important to them than it is to their opponent. My sample is comprised of the 20 English Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset. My unit of analysis will be a team (e.g. Manchester United, Leicester City, etc.). The explanatory variable of interest is how important a game is to a team (importance1 for a home team and importance 2 for an away team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable would be a count of the number of wins each team has on a range of how important the games were (e.g., count of wins in games that range from 0-20 in importance, 20-40, 40-60, etc.). If I observe more wins when the importance of the game is higher, then this will provide support for my hypothesis. If I observe more wins when the game is of less importance to a team, then this will provide evidence against my hypothesis.</p>
-<p>Milestone #4:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>count_table</span> <span class='op'>&lt;-</span> <span class='va'>pl_table_2016</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>count_table</span></span></code></pre>
-</div>
-<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
-</div>
 <p>If there is one unit increase in importance, the probability of a home win will increase by 0.4 percentage points. If there is an importance increase from 0 to 100 there will be a 40 percentage point increase in the probability of the home team winning. I believe that this effect is substantial. The p-value is extremely small which means that there is a statistically significant correlation between importance and the result of the game.</p>
 <h1 id="a-study-on-a-home-teams-performance-relative-to-the-importance-of-their-game">A Study on A Home Team’s Performance Relative to the Importance of Their Game</h1>
 <h2 id="introduction">Introduction</h2>
 <p>Does the importance of a soccer game influence whether or not a home team wins a game? In this study, I want to observe the relationship between a match’s importance to a home team and the result of that match for the team. I hypothesize that as a match increases in importance, a home team will be more likely to win their game. My sample for this study is comprised of the 20 English Premier League teams in the 2016-2017 season. I will be using the spi.matches.csv dataset to in this research. My unit of analysis will be a home team (for each individual game). The explanatory variable of interest is how important a game is to a home team (importance1 measures the importance of a home team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable is the results of a game for a home team. If I observe a positive linear relationship between the importance of a match to a home team and the result, then this will provide support for my hypothesis. If there is a negative relationship, then this would provide support against my hypothesis as this would mean that the more important the game, the less a home team wins.</p>
 <p>The study is important in order to try and understand how best to predict a sports game. There are many variables that go into predicting the result of a soccer match, but if we can isolate the importance of a game as the explanatory variable, then we will can form more accurate predictions.</p>
 <h2 id="data-1">Data</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>count_table</span> <span class='op'>&lt;-</span> <span class='va'>pl_table_2016</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>result</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_light</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>count_table</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
 <p>Linear Regression for Importance of Games for Premier League Teams</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/leifeld/texreg/'>texreg</a></span><span class='op'>)</span></span>
 <span><span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>result1</span> <span class='op'>~</span> <span class='va'>importance1</span> <span class='op'>+</span> <span class='va'>importance2</span> <span class='op'>+</span> <span class='va'>xg1</span> <span class='op'>+</span> <span class='va'>xg2</span> <span class='op'>+</span> <span class='va'>spi1</span> <span class='op'>+</span> <span class='va'>spi2</span> <span class='op'>+</span> <span class='va'>prob1</span> <span class='op'>+</span> <span class='va'>prob2</span> <span class='op'>+</span> <span class='va'>probtie</span>, data <span class='op'>=</span> <span class='va'>pl_table_2016</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'><a href='https://rdrr.io/pkg/texreg/man/screenreg.html'>screenreg</a></span><span class='op'>(</span><span class='va'>fit1</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>
-=========================
-             Model 1     
--------------------------
-(Intercept)  -405.895    
-             (485.232)   
-importance1     0.002    
-               (0.001)   
-importance2    -0.002    
-               (0.001)   
-xg1             0.152 ***
-               (0.032)   
-xg2            -0.124 ** 
-               (0.038)   
-spi1            0.013    
-               (0.010)   
-spi2           -0.016    
-               (0.010)   
-prob1         405.974    
-             (485.196)   
-prob2         406.969    
-             (485.208)   
-probtie       406.894    
-             (485.253)   
--------------------------
-R^2             0.257    
-Adj. R^2        0.237    
-Num. obs.     344        
-=========================
-*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pl_table_2016</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>importance1</span>, y <span class='op'>=</span> <span class='va'>prob1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>result1</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Importance of the Game to a Home Team"</span>, y <span class='op'>=</span> <span class='st'>"Result"</span>,title <span class='op'>=</span> <span class='st'>"Regression Between the Importance of a Home Match to a Team and the Result of the Match"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
-</div>
-<img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>result1</span> <span class='op'>~</span> <span class='va'>importance1</span>, data <span class='op'>=</span> <span class='va'>pl_table_2016</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/pkg/texreg/man/screenreg.html'>screenreg</a></span><span class='op'>(</span><span class='va'>fit2</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>
-========================
-             Model 1    
-------------------------
-(Intercept)    0.336 ***
-              (0.045)   
-importance1    0.004 ***
-              (0.001)   
-------------------------
-R^2            0.046    
-Adj. R^2       0.043    
-Num. obs.    344        
-========================
-*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit2</span></span></code></pre>
+<span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code>
 Call:
-lm(formula = result1 ~ importance1, data = pl_table_2016)
+lm(formula = result1 ~ importance1 + importance2 + xg1 + xg2 + 
+    spi1 + spi2 + prob1 + prob2 + probtie, data = pl_table_2016)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.9917 -0.3666 -0.0033  0.3866  0.8116 
 
 Coefficients:
-(Intercept)  importance1  
-   0.336467     0.003939  </code></pre>
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -4.06e+02   4.85e+02   -0.84   0.4035    
+importance1  2.12e-03   1.13e-03    1.88   0.0606 .  
+importance2 -1.97e-03   1.15e-03   -1.71   0.0888 .  
+xg1          1.52e-01   3.24e-02    4.67  4.4e-06 ***
+xg2         -1.24e-01   3.82e-02   -3.26   0.0012 ** 
+spi1         1.27e-02   9.98e-03    1.28   0.2030    
+spi2        -1.59e-02   9.78e-03   -1.63   0.1044    
+prob1        4.06e+02   4.85e+02    0.84   0.4033    
+prob2        4.07e+02   4.85e+02    0.84   0.4022    
+probtie      4.07e+02   4.85e+02    0.84   0.4023    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.437 on 334 degrees of freedom
+Multiple R-squared:  0.257, Adjusted R-squared:  0.237 
+F-statistic: 12.8 on 9 and 334 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>result1</span> <span class='op'>~</span> <span class='va'>importance1</span>, data <span class='op'>=</span> <span class='va'>pl_table_2016</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>pl_table_2016</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>importance1</span>, y <span class='op'>=</span> <span class='va'>xg1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>result1</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Importance of the Game to a Home Team"</span>, y <span class='op'>=</span> <span class='st'>"Expected Goals"</span>,title <span class='op'>=</span> <span class='st'>"Regression Between the Importance of a Home Match to a Team and the Result of the Match"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1704,7 +1679,7 @@ Coefficients:
 <span>                  <span class='st'>"probtie"</span> <span class='op'>=</span> <span class='st'>"Probability of a Tie"</span></span>
 <span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fit1</span>, statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>, <span class='st'>"p = {p.value}"</span><span class='op'>)</span>, coef_map <span class='op'>=</span> <span class='va'>pl_var_labels</span>, gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fit1</span>, statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>, <span class='st'>"p = {p.value}"</span><span class='op'>)</span>, coef_map <span class='op'>=</span> <span class='va'>pl_var_labels</span>, gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>, fmt <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1722,21 +1697,21 @@ Coefficients:
 Intercept
 </td>
 <td style="text-align:center;">
-−405.895
+−405.89
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 485.232
+s.e. = 485.23
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.403
+p = 0.40
 </td>
 </tr>
 <tr>
@@ -1744,21 +1719,21 @@ p = 0.403
 Match Importance to Home Team
 </td>
 <td style="text-align:center;">
-0.002
+0.00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.001
+s.e. = 0.00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.061
+p = 0.06
 </td>
 </tr>
 <tr>
@@ -1766,21 +1741,21 @@ p = 0.061
 Match Importance to Away Team
 </td>
 <td style="text-align:center;">
-−0.002
+0.00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.001
+s.e. = 0.00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.089
+p = 0.09
 </td>
 </tr>
 <tr>
@@ -1788,21 +1763,21 @@ p = 0.089
 Home Team Expected Goals
 </td>
 <td style="text-align:center;">
-0.152
+0.15
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.032
+s.e. = 0.03
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = &lt;0.001
+p = &lt;0.01
 </td>
 </tr>
 <tr>
@@ -1810,21 +1785,21 @@ p = &lt;0.001
 Away Team Expected Goals
 </td>
 <td style="text-align:center;">
-−0.124
+−0.12
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.038
+s.e. = 0.04
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.001
+p = &lt;0.01
 </td>
 </tr>
 <tr>
@@ -1832,21 +1807,21 @@ p = 0.001
 Home Team’s Rating Before the Match
 </td>
 <td style="text-align:center;">
-0.013
+0.01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.010
+s.e. = 0.01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.203
+p = 0.20
 </td>
 </tr>
 <tr>
@@ -1854,21 +1829,21 @@ p = 0.203
 Away Team’s Rating Before the Match
 </td>
 <td style="text-align:center;">
-−0.016
+−0.02
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.010
+s.e. = 0.01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.104
+p = 0.10
 </td>
 </tr>
 <tr>
@@ -1876,21 +1851,21 @@ p = 0.104
 Probability of Home Team Winning
 </td>
 <td style="text-align:center;">
-405.974
+405.97
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 485.196
+s.e. = 485.20
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.403
+p = 0.40
 </td>
 </tr>
 <tr>
@@ -1898,21 +1873,21 @@ p = 0.403
 Probability of Away Team Winning
 </td>
 <td style="text-align:center;">
-406.969
+406.97
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 485.208
+s.e. = 485.21
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.402
+p = 0.40
 </td>
 </tr>
 <tr>
@@ -1920,21 +1895,21 @@ p = 0.402
 Probability of a Tie
 </td>
 <td style="text-align:center;">
-406.894
+406.89
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 485.253
+s.e. = 485.25
 </td>
 </tr>
 <tr>
 <td style="text-align:left;box-shadow: 0px 1.5px">
 </td>
 <td style="text-align:center;box-shadow: 0px 1.5px">
-p = 0.402
+p = 0.40
 </td>
 </tr>
 <tr>
@@ -1968,7 +1943,7 @@ R2 Adj.
 <p>[INSERT INFO HERE]</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>[INSERT INFO HERE]</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

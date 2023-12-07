@@ -30,37 +30,24 @@ pl_table_2016 <- Data |>
 pl_table_2016
   
 pl_importance <- ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
-    geom_histogram() +
-    labs(x = "Degree of Importance of a Game to the Home Team", y = "Count")
+    geom_histogram(fill = "deepskyblue3") +
+    labs(x = "Degree of Importance of a Game to the Home Team", y = "Count") +
+  theme_bw()
+  
 pl_importance
 ```
 
 ```{r} 
 pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importance1, y = result1)) +
-  geom_col()
+  geom_point() +
+  facet_wrap(~result1) +
+  theme_bw()
 
 pl_importance_results
 ```
 ## Proposal:
 
-
 Does the importance of a soccer game influence whether or not a team wins a game? In this study, I plan to examine if a game is deemed more important for a team, will that team win that game. I hypothesize that teams will win a game when it is more important to them than it is to their opponent. My sample is comprised of the 20 English Premier League teams in the 2016 season. I will be using the spi.matches.csv dataset. My unit of analysis will be a team (e.g. Manchester United, Leicester City, etc.). The explanatory variable of interest is how important a game is to a team (importance1 for a home team and importance 2 for an away team). The explanatory variable is measured on a scale of 0-100, 0 meaning not important and 100 meaning the most important. My outcome variable would be a count of the number of wins each team has on a range of how important the games were (e.g., count of wins in games that range from 0-20 in importance, 20-40, 40-60, etc.). If I observe more wins when the importance of the game is higher, then this will provide support for my hypothesis. If I observe more wins when the game is of less importance to a team, then this will provide evidence against my hypothesis.
-
-
-Milestone #4:
-
-
-```{r}
-count_table <- pl_table_2016 |>
-  ggplot(aes(x = result)) +
-  geom_bar(mapping = aes(fill = result))
-count_table
-```
-
-
-
-
-
 
 If there is one unit increase in importance, the probability of a home win will increase by 0.4 percentage points. If there is an importance increase from 0 to 100 there will be a 40 percentage point increase in the probability of the home team winning. I believe that this effect is substantial. The p-value is extremely small which means that there is a statistically significant correlation between importance and the result of the game.
 
@@ -74,6 +61,13 @@ If there is one unit increase in importance, the probability of a home win will 
   
 ## Data
 
+```{r}
+count_table <- pl_table_2016 |>
+  ggplot(aes(x = result)) +
+  geom_bar(mapping = aes(fill = result)) +
+  theme_light()
+count_table
+```
 
 Linear Regression for Importance of Games for Premier League Teams
 
@@ -81,18 +75,16 @@ Linear Regression for Importance of Games for Premier League Teams
 library(texreg)
 fit1 <- lm(result1 ~ importance1 + importance2 + xg1 + xg2 + spi1 + spi2 + prob1 + prob2 + probtie, data = pl_table_2016)
 
-screenreg(fit1, digits = 3)
-
-pl_table_2016 |>
-  ggplot(aes(x = importance1, y = prob1)) +
-  geom_point() +
-  facet_wrap(~result1) +
-  labs(x = "Importance of the Game to a Home Team", y = "Result",title = "Regression Between the Importance of a Home Match to a Team and the Result of the Match") +
-  theme_bw()
+print(summary(fit1), digits = 3)
 
 fit2 <- lm(result1 ~ importance1, data = pl_table_2016)
-screenreg(fit2, digits = 3)
-fit2
+
+pl_table_2016 |>
+  ggplot(aes(x = importance1, y = xg1)) +
+  geom_point() +
+  facet_wrap(~result1) +
+  labs(x = "Importance of the Game to a Home Team", y = "Expected Goals",title = "Regression Between the Importance of a Home Match to a Team and the Result of the Match") +
+  theme_bw()
 ```
 
 ```{r}
@@ -112,7 +104,7 @@ pl_var_labels <- c("(Intercept)" = "Intercept",
                   "probtie" = "Probability of a Tie"
 )
 
-modelsummary::modelsummary(fit1, statistic = c("s.e. = {std.error}", "p = {p.value}"), coef_map = pl_var_labels, gof_map = c("nobs", "r.squared", "adj.r.squared"))
+modelsummary::modelsummary(fit1, statistic = c("s.e. = {std.error}", "p = {p.value}"), coef_map = pl_var_labels, gof_map = c("nobs", "r.squared", "adj.r.squared"), fmt = 2)
 ```
 
 ## Results
