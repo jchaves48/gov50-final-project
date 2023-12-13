@@ -74,37 +74,50 @@ pl_table_2016 <- Data |>
 pl_table_2016
 ```  
 
+## Histogram of Games and Their Importance
+
 ```{r}
 pl_importance <- ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
     geom_histogram(fill = "deepskyblue3") +
-    labs(x = "Degree of Importance of a Game to the Home Team", y = "Count") +
-  theme_bw()
+    labs(x = "Degree of Importance of a Game to the Home Team", y = "Count", title = "Count of Games and How Important They Are") +
+  theme_bw() +
+  geom_vline(aes(xintercept = mean(pl_table_2016$importance1)), color = "red2")
   
 pl_importance
 ```
+
+This histogram visualizes the spread of the importance of games. In the data, there are certainly more games that are less important than important. Most of the data is skewed to the left of the histogram. The below 50 points The vertical line shows the mean of the importance of games to a home team, which is about 37. So an average game's importance was about 37 out of 100.
+
+## Table of the Home Team's Results 
+
+```{r}
+count_table <- pl_table_2016 |>
+  group_by(result) |>
+  summarize(n = n())
+
+knitr::kable(count_table, col.names = c("Result of Home Games", "Total Count"))
+
+```
+
+This table breaks down the total number of each results that are included in the data. There are 166 home wins, 76 draws, and 102 home losses. The table may show a 
+
+## Scatterplot of the Results of a Game in Relation to the Importance of that Game to a Home Team
 
 ```{r} 
 pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importance1, y = result1)) +
   geom_point(alpha = 0.3, color = "navy") +
   theme_bw() +
   geom_smooth(method = "lm", color = "dodgerblue2", fill = "skyblue") +
-  labs(x = "Importance of the game to a Home Team", y = "Result of the Game (1 = win/draw and 0 = loss)", title = "Results of Games in Relation to the Importance of the Game to a Home Team")
+  labs(x = "Importance of the game to a Home Team", y = "Result of the Game (1 = win and 0 = loss/draw)", title = "Results of Games in Relation to the Importance of the Game to a Home Team")
   
 
 pl_importance_results
 ```
 
 
+## Confounders
 
-```{r}
-count_table <- pl_table_2016 |>
-  ggplot(aes(x = result)) +
-  geom_bar(mapping = aes(fill = result)) +
-  theme_light()
-count_table
-```
-
-Linear Regression for Importance of Games for Premier League Teams
+### Expected Goals (xG)
 
 ```{r}
 library(texreg)
@@ -114,14 +127,32 @@ print(summary(fit1), digits = 3)
 
 fit2 <- lm(result1 ~ importance1, data = pl_table_2016)
 
-pl_table_2016 |>
-  ggplot(aes(x = importance1, y = xg1)) +
-  geom_point(alpha = 0.5) +
-  facet_wrap(~result1) +
-  labs(x = "Importance of the Game to a Home Team", y = "Expected Goals",title = "Regression Between the Importance of a Home Match to a Team and the Result of the Match") +
+xg1_point <- pl_table_2016 |>
+  ggplot(aes(x = xg1, y = result1)) +
+  geom_point(alpha = 0.3, color = "seagreen4") +
+  labs(x = "Expected Goals in a Game by the Home Team", y = "Result of the Game (1 = win and 0 = loss/draw)", title = "Plot of the Relationship Between xG and the Result of a Game") +
   theme_bw() +
-  geom_smooth(method = "lm", color = "red2", fill = "coral")
+  geom_smooth(method = "lm", color = "cadetblue3", fill = "lightcyan2")
+
+xg1_point
 ```
+
+### SPI Rating
+
+```{r}
+spi_rating_plot <- pl_table_2016 |>
+  ggplot(aes(x = spi1, y = result1)) +
+  geom_point(alpha = 0.3, color = "maroon") +
+  labs(x = "SPI Rating of the Home Team", y = "Result of the Game (1 = win and 0 = loss/draw)",title = "Relationship Between Soccer Power Index Rating (SPI) and the Result of a Game") +
+  theme_bw() +
+  geom_smooth(method = "lm", color = "slateblue4", fill = "lightslateblue")
+
+spi_rating_plot
+```
+
+ 
+
+# Results
 
 ```{r}
 library(broom)
@@ -143,10 +174,8 @@ pl_var_labels <- c("(Intercept)" = "Intercept",
 modelsummary::modelsummary(fit1, statistic = c("s.e. = {std.error}", "p = {p.value}"), coef_map = pl_var_labels, gof_map = c("nobs", "r.squared", "adj.r.squared"), fmt = 2)
 ```
 
-## Results
-
-[INSERT INFO HERE]
-
-## Conclusion
+# Conclusion
 
 The purpose of this study was to observe the relationship between the importance of games to a Barclay's Premier League home team and the result of those games in the 2016-2017 season. I hypothesized that as the importance of the games increased, teams would get more wins than losses/draws. 
+
+Given more time and money, I would improve this analysis by broadening the scope of this study to other soccer leagues across the world. 
