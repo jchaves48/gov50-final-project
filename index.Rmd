@@ -99,7 +99,7 @@ knitr::kable(count_table, col.names = c("Result of Home Games", "Total Count"))
 
 ```
 
-This table breaks down the total number of each results that are included in the data. There are 166 home wins, 76 draws, and 102 home losses. The table may show a 
+This table breaks down the total number of each results that are included in the data. There are 166 home wins, 76 draws, and 102 home losses. The table summarizes the positive and negative results that
 
 ## Scatterplot of the Results of a Game in Relation to the Importance of that Game to a Home Team
 
@@ -109,7 +109,6 @@ pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importan
   theme_bw() +
   geom_smooth(method = "lm", color = "dodgerblue2", fill = "skyblue") +
   labs(x = "Importance of the game to a Home Team", y = "Result of the Game (1 = win and 0 = loss/draw)", title = "Results of Games in Relation to the Importance of the Game to a Home Team")
-  
 
 pl_importance_results
 ```
@@ -117,27 +116,33 @@ pl_importance_results
 
 ## Confounders
 
-### Expected Goals (xG)
+### The Home Team's Projected Score
 
 ```{r}
-library(texreg)
-fit1 <- lm(result1 ~ importance1 + importance2 + xg1 + xg2 + spi1 + spi2 + prob1 + prob2 + probtie, data = pl_table_2016)
-
-print(summary(fit1), digits = 3)
-
-fit2 <- lm(result1 ~ importance1, data = pl_table_2016)
-
-xg1_point <- pl_table_2016 |>
-  ggplot(aes(x = xg1, y = result1)) +
+proj_score_point <- pl_table_2016 |>
+  ggplot(aes(x = proj_score1, y = result1)) +
   geom_point(alpha = 0.3, color = "seagreen4") +
-  labs(x = "Expected Goals in a Game by the Home Team", y = "Result of the Game (1 = win and 0 = loss/draw)", title = "Plot of the Relationship Between xG and the Result of a Game") +
+  labs(x = "Projected Goals in a Game by the Home Team", y = "Result of the Game (1 = win and 0 = loss/draw)", title = "Plot of the Relationship Between Projected Score and the Result of a Game") +
   theme_bw() +
   geom_smooth(method = "lm", color = "cadetblue3", fill = "lightcyan2")
 
-xg1_point
+proj_score_point
 ```
 
-### SPI Rating
+```{r}
+proj_score_point1 <- pl_table_2016 |>
+  ggplot(aes(x = proj_score1, y = importance1)) +
+  geom_point(alpha = 0.3, color = "seagreen4") +
+  labs(x = "Projected Goals in a Game by the Home Team", y = "Importance of Games", title = "Plot of the Relationship Between Projected Score and the Importance of a Game") +
+  theme_bw() +
+  geom_smooth(method = "lm", color = "darkorchid4", fill = "orchid")
+
+proj_score_point1
+```
+
+
+
+### SPI Rating of the Home Team
 
 ```{r}
 spi_rating_plot <- pl_table_2016 |>
@@ -150,11 +155,19 @@ spi_rating_plot <- pl_table_2016 |>
 spi_rating_plot
 ```
 
- 
+With the experiment, I wanted to account for potential confounding variables that would most influence the results of the games and the importance of the game. Two confounding variables I chose to analyze were the projected score for the home team and the home team's Soccer Power Index (SPI) rating before the game. The projected score could influence the result as a smaller projected score for the home team could lead to a negative result. The projected score may also be a reflection of the importance of a game as a higher projected score may mean a higher importance as teams have that pressure to achieve what is projected for them. SPI rating can make influence the result as a lower rated team may falter to higher rated team and the SPI rating might reflect the importance of the match. Facing similarly rated or worse-rated opposition may make it more imperative for teams to get a positive result. Facing higher opposition would mean a game is less important because they are not as likely to win. 
 
 # Results
 
 ```{r}
+library(texreg)
+fit1 <- lm(result1 ~ importance1 + importance2 + xg1 + xg2 + spi1 + spi2 + prob1 + prob2 + probtie, data = pl_table_2016)
+
+print(summary(fit1), digits = 3)
+
+fit2 <- lm(result1 ~ importance1, data = pl_table_2016)
+
+
 library(broom)
 fit1_table <- tidy(fit1)
 fit1_table
@@ -173,6 +186,7 @@ pl_var_labels <- c("(Intercept)" = "Intercept",
 
 modelsummary::modelsummary(fit1, statistic = c("s.e. = {std.error}", "p = {p.value}"), coef_map = pl_var_labels, gof_map = c("nobs", "r.squared", "adj.r.squared"), fmt = 2)
 ```
+
 
 # Conclusion
 
