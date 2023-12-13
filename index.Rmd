@@ -86,7 +86,7 @@ pl_importance <- ggplot(data = pl_table_2016, mapping = aes(x = importance1)) +
 pl_importance
 ```
 
-This histogram visualizes the spread of the importance of games. In the data, there are certainly more games that are less important than important. Most of the data is skewed to the left of the histogram. The vertical line shows the mean of the importance of games to a home team, which is about 37. So an average game's importance was about 37 points out of 100. Could this perhaps skew the data as there are more 
+This histogram visualizes the spread of the importance of games. In the data, there are certainly more games that are less important than important. Most of the data is skewed to the left of the histogram. The vertical line shows the mean of the importance of games to a home team, which is about 37. So an average game's importance was about 37 points out of 100. Questions do arise as to what goes into the importance of a game and why a great number of games are not important to the teams.
 
 ## Table of the Home Team's Results 
 
@@ -97,13 +97,26 @@ count_table <- pl_table_2016 |>
 
 knitr::kable(count_table, col.names = c("Result of Home Games", "Total Count"))
 
+count_barplot <- ggplot(data = pl_table_2016, mapping = aes(x = result, fill = result)) +
+  geom_bar() +
+  labs(x = "Result of Game", y = "Count", title = "Number of Wins, Draws, and Losses For a Home Team") +
+  theme_bw()
+count_barplot
 ```
 
-This table breaks down the total number of each results that are included in the data. Out of the 344 total games observed in the data, there are 166 home wins, 76 draws, and 102 home losses. In terms of negative and positive results, there are more negative results than positive results. 
+This table and bar graph breaks down the main outcome of interest. That being the result of the games for a home team. Out of the 344 total games observed in the data, there are 166 home wins, 76 draws, and 102 home losses. In terms of negative and positive results, there are more negative results than positive results. The question becomes, in the absence of the actual scoreline, how much influence does the importance of a game have on the outcome? 
 
-## Scatterplot of the Results of a Game in Relation to the Importance of that Game to a Home Team
 
-```{r} 
+## Confounders
+
+
+With the experiment, I wanted to account for potential confounding variables that would most influence the results of the games and the importance of the game. Two confounding variables I chose to analyze were the projected score for the home team and the home team's Soccer Power Index (SPI) rating before the game. The projected score could influence the result as a smaller projected score for the home team could lead to a negative result. The projected score may also be a reflection of the importance of a game as a higher projected score may mean a higher importance as teams have that pressure to achieve what is projected for them. SPI rating can make influence the result as a lower rated team may falter to higher rated team and the SPI rating might reflect the importance of the match. Facing similarly rated or worse-rated opposition may make it more imperative for teams to get a positive result. Facing higher opposition would mean a game is less important because they are not as likely to win. 
+
+# Results
+
+## Plot of Main Analysis: 
+
+```{r}
 pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importance1, y = result1)) +
   geom_point(alpha = 0.3, color = "navy") +
   theme_bw() +
@@ -113,9 +126,10 @@ pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importan
 pl_importance_results
 ```
 
-The main outcome of interest is the result of home teams' games in relation to the game's importance. The points on the scatter plot are on y = 0 and y = 1, because the result variable is a binary. 0 meaning a negative result (loss or a draw) and 1 meaning a positive result (win). The plot shows a higher congregation of negative results when the importance of the game is lower and a higher congregation of positive results when the importance is greater. The regression line shows the positive association between the importance of games and its results for the home team. From this plot, the hypothesis can be substantiated, but this is done without adjusting for any confounding variables that might be influencing the plot. But from this initial observation of the main outcome of interest, there seems to be evidence in favor of the hypothesis.
+The main plot of analysis is the result of home teams' games in relation to the game's importance. The points on the scatter plot are on y = 0 and y = 1, because the result variable is a binary. 0 meaning a negative result (loss or a draw) and 1 meaning a positive result (win). The plot shows a higher congregation of negative results when the importance of the game is lower and a higher congregation of positive results when the importance is greater. As the unit of importance increases, we can see that there is a higher possibility of the home team winning the game. The regression line shows the positive association between the importance of games and its results for the home team. From this plot, the hypothesis can be substantiated, but this is done without adjusting for any confounding variables that might be influencing the plot. But from this initial observation of the main outcome of interest, there seems to be evidence in favor of the hypothesis.
 
-## Confounders
+
+## Confounding Variables
 
 ### The Home Team's Projected Score
 
@@ -133,14 +147,13 @@ proj_score_point
 ```{r}
 proj_score_point1 <- pl_table_2016 |>
   ggplot(aes(x = proj_score1, y = importance1)) +
-  geom_point(alpha = 0.3, color = "seagreen4") +
+  geom_point(alpha = 0.5, color = "seagreen4") +
   labs(x = "Projected Goals in a Game by the Home Team", y = "Importance of Games", title = "Plot of the Relationship Between Projected Score and the Importance of a Game") +
   theme_bw() +
-  geom_smooth(method = "lm", color = "darkorchid4", fill = "orchid")
+  geom_smooth(method = "lm", color = "cadetblue3", fill = "lightcyan2")
 
 proj_score_point1
 ```
-
 
 
 ### SPI Rating of the Home Team
@@ -155,16 +168,18 @@ spi_rating_plot <- pl_table_2016 |>
 
 spi_rating_plot
 ```
+```{r}
+spi_rating_plot1 <- pl_table_2016 |>
+  ggplot(aes(x = spi1, y = importance1)) +
+  geom_point(alpha = 0.3, color = "maroon") +
+  labs(x = "SPI Rating of the Home Team", y = "Importance of Game",title = "Relationship Between Soccer Power Index Rating (SPI) and the Importance of a Game") +
+  theme_bw() +
+  geom_smooth(method = "lm", color = "slateblue4", fill = "lightslateblue")
 
-With the experiment, I wanted to account for potential confounding variables that would most influence the results of the games and the importance of the game. Two confounding variables I chose to analyze were the projected score for the home team and the home team's Soccer Power Index (SPI) rating before the game. The projected score could influence the result as a smaller projected score for the home team could lead to a negative result. The projected score may also be a reflection of the importance of a game as a higher projected score may mean a higher importance as teams have that pressure to achieve what is projected for them. SPI rating can make influence the result as a lower rated team may falter to higher rated team and the SPI rating might reflect the importance of the match. Facing similarly rated or worse-rated opposition may make it more imperative for teams to get a positive result. Facing higher opposition would mean a game is less important because they are not as likely to win. 
+spi_rating_plot1
+```
 
-# Results
-
-### Plot of Main Analysis
-
-
-
-### Regression Output
+## Regression Output
 
 ```{r}
 library(texreg)
@@ -192,6 +207,7 @@ pl_var_labels <- c("(Intercept)" = "Intercept",
 
 modelsummary::modelsummary(fit1, statistic = c("s.e. = {std.error}", "p = {p.value}"), coef_map = pl_var_labels, gof_map = c("nobs", "r.squared", "adj.r.squared"), fmt = 3)
 ```
+
 
 
 # Conclusion
