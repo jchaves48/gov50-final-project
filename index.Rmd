@@ -111,7 +111,7 @@ With the experiment, I wanted to account for potential confounding variables tha
 
 ## Scatter Plot and Regression of Main Dependent Variable: 
 
-My primary independent variable of interest was the `importance1` (Importance of a Game to a Home Team) variable. The scatter plot and linear regression below details the relationship between `result1` and only `importance1`.
+My primary independent variable of interest was the `importance1` (Importance of a Game to a Home Team) variable. The scatter plot and linear regression below details the relationship between `result1` and `importance1`.
 
 ```{r}
 pl_importance_results <- ggplot(data = pl_table_2016, mapping = aes(x = importance1, y = result1)) +
